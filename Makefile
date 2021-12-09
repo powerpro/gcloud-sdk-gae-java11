@@ -1,8 +1,8 @@
 ###############################################################################
 # PROPERTIES
 ###############################################################################
-DOCKER_REGISTRY = powerpro-gcloud-sdk-gae-java8.jfrog.io
-NAME = gcloud-sdk-gae-java8
+DOCKER_REGISTRY = powerpro-gcloud-sdk-gae-java11.jfrog.io
+NAME = gcloud-sdk-gae-java11
 VERSION ?= latest
 
 .PHONY: default
