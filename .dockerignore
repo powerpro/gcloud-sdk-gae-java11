@@ -1,0 +1,6 @@
+.circleci/
+.editorconfig
+Makefile
+Session.vim
+package.json
+tags

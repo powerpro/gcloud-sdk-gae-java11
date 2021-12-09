@@ -1,0 +1,38 @@
+# yamllint disable rule:line-length
+---
+version: 2
+jobs:
+  build:
+    machine: true
+    working_directory: ~/gcloud-sdk-gae-java8
+    steps:
+      - checkout
+
+      - run:
+          name: Build and Deploy the Docker Image
+          command: |
+            REPO_HOST=powerpro-gcloud-sdk-gae-java8.jfrog.io
+            docker login -u $ARTIFACTORY_USER -p $ARTIFACTORY_PASS $REPO_HOST
+            make build
+            make push
+
+# https://circleci.com/docs/2.0/workflows/
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              ignore: gh-pages
+  weekly:
+    triggers:
+      - schedule:
+          # This project is rarely updated so run a weekly build.
+          cron: "0 0 * * 0"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - build
